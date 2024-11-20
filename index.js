@@ -4,6 +4,7 @@ require('dotenv').config(); // read the environmental variables from the .env
 
 // import routers
 const productRouter = require("./routes/products");
+const userRouter = require('./routes/user');
 
 const app = express();
 
@@ -19,7 +20,8 @@ app.get("/", function(req,res){
     })
 })
 
-app.use("/api/products", productRouter)
+app.use("/api/products", productRouter);
+app.use("/api/users", userRouter);
 
 // No routes after app.listen()
 
