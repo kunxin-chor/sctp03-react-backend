@@ -2,18 +2,27 @@ const  express = require('express');
 // create a router
 const router = express.Router(); 
 
+const productService = require('../service/productService')
+
 // a router contaains routes
 // it can contain PUT, GET, PATCH, POST, DESTROY 
-router.get('/', function(req,res){
-    res.json({
-        message:"GET products"
-    })
+router.get('/', async function(req,res){
+   try {
+    const products = await productService.getAllProducts();
+    res.json(products);
+   } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+   }
 })
 
-router.get('/:id', function(req,res){
-    res.json({
-        message:"GET product with id" + req.params.id
-    })
+router.get('/:id', async function(req,res){
+   try {
+    const products = await productService.getProductById(req.params.id); 
+    res.json(products);
+   } catch (error) {
+    res.sendStatus(500);
+   }
 })
 
 
