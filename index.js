@@ -1,10 +1,12 @@
 const express = require('express');
 const cors = require('cors'); // enable cross origin resources sharing
 require('dotenv').config(); // read the environmental variables from the .env
+                            // make sure to have this line before accessing process.env
 
 // import routers
 const productRouter = require("./routes/products");
 const userRouter = require('./routes/user');
+const cartRouter = require('./routes/cart');
 
 const app = express();
 
@@ -22,6 +24,7 @@ app.get("/", function(req,res){
 
 app.use("/api/products", productRouter);
 app.use("/api/users", userRouter);
+app.use("/api/cart", cartRouter)
 
 // No routes after app.listen()
 

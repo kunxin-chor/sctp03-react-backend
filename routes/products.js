@@ -4,7 +4,7 @@ const router = express.Router();
 
 const productService = require('../service/productService')
 
-// a router contaains routes
+// a router contains routes
 // it can contain PUT, GET, PATCH, POST, DESTROY 
 router.get('/', async function(req,res){
    try {
