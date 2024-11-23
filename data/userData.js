@@ -56,6 +56,8 @@ async function createUser({ name, email, password, salutation, country, marketin
         return userId;
     } catch (error) {
         await connection.rollback(); // if any errors occur int the try block, undo all database changes since beginTransaction()
+    } finally {
+        connection.release();
     }
 }
 

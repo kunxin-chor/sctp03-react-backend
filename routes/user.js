@@ -32,10 +32,10 @@ router.post("/login", async function(req,res){
         "token": token
     })
    } catch(error) {
-    res.sendStatus(401).json({
+    res.status(401).json({
         message: error.message
-    })
-   }
+    }) 
+   } 
 })
 
 // export routes

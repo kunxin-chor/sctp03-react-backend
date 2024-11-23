@@ -42,6 +42,8 @@ async function updateCart(userId, cartItems) {
         await connection.commit();
     } catch (e) {
         await connection.rollback();
+    } finally {
+        connection.release();
     }
 }
 
