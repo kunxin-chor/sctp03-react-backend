@@ -7,6 +7,7 @@ async function getCartContents(userId) {
     const [rows] =  await pool.query(
         `SELECT cart_items.id, 
             product_id, 
+            name AS productName,
             image AS imageUrl, 
             CAST(price AS DOUBLE) AS price, 
             quantity
@@ -43,6 +44,7 @@ async function updateCart(userId, cartItems) {
     } catch (e) {
         await connection.rollback();
     } finally {
+        // always release connection regardless of error or not
         connection.release();
     }
 }

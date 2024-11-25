@@ -7,11 +7,14 @@ require('dotenv').config(); // read the environmental variables from the .env
 const productRouter = require("./routes/products");
 const userRouter = require('./routes/user');
 const cartRouter = require('./routes/cart');
+const checkoutRouter = require('./routes/checkout')
 
 const app = express();
 
 // setup for RESTFul API
-app.use(express.json()); // indicate that we are reciving JSON payloads in requests
+// disable global express.json so that it won't interfere
+// with the webhook
+// app.use(express.json()); // indicate that we are reciving JSON payloads in requests
 app.use(cors()); // enable cross origin resources sharing
 
 // Routes Begin Here
@@ -22,9 +25,10 @@ app.get("/", function(req,res){
     })
 })
 
-app.use("/api/products", productRouter);
-app.use("/api/users", userRouter);
-app.use("/api/cart", cartRouter)
+app.use("/api/products", express.json(), productRouter);
+app.use("/api/users", express.json(), userRouter);
+app.use("/api/cart", express.json(), cartRouter);
+app.use('/api/checkout', checkoutRouter);
 
 // No routes after app.listen()
 
